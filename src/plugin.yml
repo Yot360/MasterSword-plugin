@@ -1,9 +1,0 @@
-name: MasterSword
-version: 0.0.1
-author: Yot
-description: A minecraft plugin that adds a master sword, a very powerfull sword
-main: com.yot.mastersword.Main
-commands:
-  mastersword:
-    description: Gives a master sword to player
-    permission: mastersword.use
