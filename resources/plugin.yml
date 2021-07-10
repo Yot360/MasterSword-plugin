@@ -1,0 +1,15 @@
+name: MasterSword
+version: 1.0.1
+author: Yot360
+description: A minecraft plugin that adds a master sword, a very powerfull weapon
+main: com.yot.mastersword.Main
+commands:
+  mastersword:
+    description: Gives a master sword to player
+    permission: mastersword.use
+  masterspawn:
+    description: Spawns a chest with a master sword in it
+    permission: masterspawn.use
+  masterclear:
+    description: Delete UUIDs from List, so players can have effects when re-opening a chest with the sword
+    permission: masterclear.use

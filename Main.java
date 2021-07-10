@@ -1,7 +1,6 @@
 package com.yot.mastersword;
 
-import com.google.gson.Gson;
-import com.yot.mastersword.commands.CommandClear;
+import com.yot.mastersword.commands.CommandMasterClear;
 import com.yot.mastersword.commands.CommandMasterSword;
 import com.yot.mastersword.commands.CommandRandomChest;
 import org.bukkit.Bukkit;
@@ -11,8 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.*;
 
 public class Main extends JavaPlugin{
 
@@ -24,10 +21,10 @@ public class Main extends JavaPlugin{
         getCommand("mastersword").setExecutor(new CommandMasterSword());
         getCommand("masterspawn").setExecutor(new CommandRandomChest(this));
         getServer().getPluginManager().registerEvents(new ChestListener(), this);
-        getCommand("masterclear").setExecutor(new CommandClear());
+        getCommand("masterclear").setExecutor(new CommandMasterClear());
 
         // Create players.json file inside the proper plugin folder
-        if(getDataFolder().exists()){
+        if(!getDataFolder().exists()){
             getDataFolder().mkdir();
         }
         players_json = new File(getDataFolder() + File.separator + "players.json");
