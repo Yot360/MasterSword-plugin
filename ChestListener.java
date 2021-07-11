@@ -30,26 +30,7 @@ public class ChestListener implements Listener {
         Player p = e.getPlayer();
         String players_path = Main.players_json.getPath();
 
-        //check if serialized
-        if (players == null) {
-            //checks the JSON
-            String file_json = players_path;
-            Gson gson = new Gson();
-            Reader reader = null;
-            try {
-                reader = Files.newBufferedReader(Paths.get(file_json));
-            } catch (IOException f) {
-                f.printStackTrace();
-            }
-            assert reader != null;
-            players = gson.fromJson(reader, List.class);
-            try {
-                reader.close();
-            } catch (IOException f) {
-                f.printStackTrace();
-            }
-            //System.out.println(players);
-        }
+
 
         //Makes the custom sword
         ItemStack customsword = new ItemStack(Material.DIAMOND_SWORD, 1);
@@ -64,12 +45,31 @@ public class ChestListener implements Listener {
         UUID uuid = p.getUniqueId();
         String uuidStr = uuid.toString();
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (!players.contains(uuidStr)) {
-                Block b = e.getClickedBlock();
-
-                //check if its a chest
-                assert b != null;
-                if (b.getType().equals(Material.CHEST)) {
+            Block b = e.getClickedBlock();
+            assert b != null;
+            //check if its a chest
+            if (b.getType().equals(Material.CHEST)) {
+                //check if serialized
+                if (players == null) {
+                    //checks the JSON
+                    String file_json = players_path;
+                    Gson gson = new Gson();
+                    Reader reader = null;
+                    try {
+                        reader = Files.newBufferedReader(Paths.get(file_json));
+                    } catch (IOException f) {
+                        f.printStackTrace();
+                    }
+                    assert reader != null;
+                    players = gson.fromJson(reader, List.class);
+                    try {
+                        reader.close();
+                    } catch (IOException f) {
+                        f.printStackTrace();
+                    }
+                    //System.out.println(players);
+                }
+                if (!players.contains(uuidStr)) {
                     Chest chest = (Chest) b.getState();
                     //checks if chest has the custom name : Master Sword Chest
                     if (chest.getInventory().contains(customsword)) {
